@@ -319,7 +319,8 @@ textarea::placeholder {
 
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
-  .setup-studio-workbench {
+  .setup-studio-workbench,
+  .home-studio-workbench {
     grid-template-columns: 1fr !important;
   }
 }

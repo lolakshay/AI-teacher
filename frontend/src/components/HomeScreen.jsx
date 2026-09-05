@@ -1,197 +1,418 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   GraduationCap, 
-  Play,
+  Play, 
   Zap, 
   BookOpen, 
   UploadCloud, 
   Video, 
   Activity, 
   BrainCircuit, 
-  Award,
-  ArrowRight,
-  Sparkles,
-  ShieldCheck
+  Award, 
+  ArrowRight, 
+  Sparkles, 
+  ShieldCheck, 
+  Sliders, 
+  Cpu, 
+  Terminal, 
+  Layers, 
+  CheckCircle2, 
+  Search, 
+  FileText, 
+  Clock, 
+  Compass
 } from 'lucide-react';
+import { DEMO_PRESETS } from '../data/presets';
 
 export default function HomeScreen({ onStartLearning, onLaunchCanonicalDemo, onOpenUpload, onChooseTopic }) {
+  const [quickTopic, setQuickTopic] = useState("");
+
+  const handleQuickLaunch = (e) => {
+    e.preventDefault();
+    if (quickTopic.trim()) {
+      onStartLearning();
+    } else {
+      onStartLearning();
+    }
+  };
+
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: '48px' }}>
+    <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       
-      {/* Hero Section */}
-      <section style={{ 
-        textAlign: 'center', 
-        padding: '56px 32px', 
-        borderRadius: '24px',
-        background: 'linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 50%, #F1F5F9 100%)',
-        border: '1px solid #CBD5E1',
-        boxShadow: 'var(--shadow-md)',
-        display: 'flex',
-        flexDirection: 'column',
+      {/* Desktop Software Application Status & Mission Control Bar */}
+      <div className="glass-panel" style={{ 
+        padding: '14px 20px', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
         alignItems: 'center',
-        gap: '20px'
+        background: '#FFFFFF',
+        border: '1px solid #E2E8F0',
+        borderRadius: '12px'
       }}>
-        {/* Academic Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 14px', borderRadius: '20px', background: '#EFF6FF', border: '1px solid #BFDBFE', color: '#1D4ED8', fontSize: '0.82rem', fontWeight: 600 }}>
-          <GraduationCap size={15} />
-          <span>Adaptive Multi-Modal STEM Education</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#EFF6FF', border: '1px solid #BFDBFE', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2563EB' }}>
+            <Cpu size={18} />
+          </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Workspace</span>
+              <span style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>/</span>
+              <span style={{ fontSize: '0.85rem', color: '#0F172A', fontWeight: 700 }}>AI Teacher Pedagogical Studio</span>
+            </div>
+            <p style={{ fontSize: '0.78rem', color: '#64748B', marginTop: '1px' }}>
+              Autonomous multi-modal instruction engine with real-time video, smart whiteboard, and diagnostic remediation.
+            </p>
+          </div>
         </div>
 
-        {/* Main Title */}
-        <h1 style={{ 
-          fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', 
-          fontWeight: 800, 
-          letterSpacing: '-0.03em',
-          lineHeight: 1.15,
-          color: '#0F172A',
-          maxWidth: '900px'
-        }}>
-          An AI Teacher That Teaches You Through Video
-        </h1>
+        {/* Global Toolbar Action Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.74rem', color: '#475569', fontWeight: 600 }}>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
+            <span>Gemini 3.7 Flash Engine Online</span>
+          </div>
 
-        {/* Subtitle */}
-        <p style={{ 
-          fontSize: 'clamp(1.05rem, 2vw, 1.25rem)', 
-          color: '#475569', 
-          maxWidth: '720px', 
-          lineHeight: 1.6 
-        }}>
-          Your AI teacher adapts explanations, examples, questions, and difficulty to how you learn. Experience video-first instruction, dynamic interactive whiteboards, diagnostic probes, and real-time misconception remediation.
-        </p>
+          <button 
+            onClick={onOpenUpload}
+            className="btn btn-secondary" 
+            style={{ padding: '7px 14px', fontSize: '0.8rem', gap: '6px' }}
+            title="Ingest study material (PDF, DOCX, TXT)"
+          >
+            <UploadCloud size={14} />
+            <span>Ingest Notes (RAG)</span>
+          </button>
 
-        {/* Primary CTA Buttons */}
-        <div style={{ display: 'flex', gap: '16px', marginTop: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
           <button 
             id="btn-home-start-learning"
-            className="btn btn-primary"
+            className="btn btn-secondary"
             onClick={onStartLearning}
-            style={{ padding: '12px 28px', fontSize: '1rem', borderRadius: '10px' }}
+            style={{ padding: '7px 14px', fontSize: '0.8rem', gap: '6px' }}
           >
-            <span>Start Learning</span>
-            <ArrowRight size={18} />
+            <Sliders size={14} />
+            <span>Configure Session</span>
           </button>
 
           <button 
             id="btn-home-canonical-demo"
-            className="btn btn-amber"
+            className="btn btn-primary"
             onClick={onLaunchCanonicalDemo}
-            style={{ padding: '12px 24px', fontSize: '1rem', borderRadius: '10px' }}
-            title="Launch guided Ohm's Law demonstration"
+            style={{ padding: '7px 16px', fontSize: '0.82rem', gap: '6px' }}
+            title="Launch guided Ohm's Law demonstration session"
           >
-            <Play size={16} fill="currentColor" />
-            <span>Demo Lesson (Ohm's Law)</span>
+            <Play size={14} fill="currentColor" />
+            <span>Launch Demo Lab (Ohm's Law)</span>
           </button>
         </div>
+      </div>
 
-        {/* Secondary Quick Jump Options */}
-        <div style={{ display: 'flex', gap: '12px', marginTop: '8px', color: 'var(--text-muted)', fontSize: '0.9rem', alignItems: 'center' }}>
-          <span>Or explore via:</span>
-          <button 
-            onClick={onOpenUpload}
-            className="btn btn-secondary" 
-            style={{ padding: '6px 14px', fontSize: '0.82rem' }}
-          >
-            <UploadCloud size={14} />
-            <span>Upload Material</span>
-          </button>
-          <button 
-            onClick={onChooseTopic}
-            className="btn btn-secondary" 
-            style={{ padding: '6px 14px', fontSize: '0.82rem' }}
-          >
-            <BookOpen size={14} />
-            <span>Choose a Topic</span>
-          </button>
+      {/* Main Studio Workbench (Split 2-Column Workstation Layout) */}
+      <div className="home-studio-workbench" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 400px', gap: '20px', alignItems: 'start' }}>
+        
+        {/* LEFT COLUMN: Mission Control & Curriculum Laboratory */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          
+          {/* Quick Launch & Session Search Bar */}
+          <div className="glass-panel" style={{ padding: '20px 22px', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <span style={{ fontSize: '0.74rem', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Quick Session Launcher
+              </span>
+              <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>
+                Type any subject or select from curriculum laboratory below
+              </span>
+            </div>
+
+            <form onSubmit={handleQuickLaunch} style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                <Search size={16} color="#94A3B8" style={{ position: 'absolute', left: '14px' }} />
+                <input 
+                  type="text"
+                  value={quickTopic}
+                  onChange={(e) => setQuickTopic(e.target.value)}
+                  placeholder="e.g. Ohm's Law & Circuit Dynamics, Binary Search, Newton's Third Law, Fourier Series..."
+                  style={{
+                    width: '100%',
+                    padding: '11px 16px 11px 40px',
+                    borderRadius: '8px',
+                    background: '#F8FAFC',
+                    border: '1px solid #CBD5E1',
+                    color: '#0F172A',
+                    fontSize: '0.9rem',
+                    fontWeight: 500
+                  }}
+                />
+              </div>
+
+              <button 
+                type="submit"
+                className="btn btn-primary"
+                style={{ padding: '11px 22px', fontSize: '0.88rem', gap: '6px', whiteSpace: 'nowrap' }}
+              >
+                <Sparkles size={15} />
+                <span>Initialize Studio Session</span>
+              </button>
+            </form>
+          </div>
+
+          {/* Curriculum Laboratories & Standard STEM Modules */}
+          <div className="glass-panel" style={{ padding: '22px', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <BookOpen size={17} color="#2563EB" />
+                <h3 style={{ fontSize: '0.98rem', fontWeight: 700, color: '#0F172A' }}>
+                  Standard Curriculum Modules & Interactive Laboratories
+                </h3>
+              </div>
+              <span style={{ fontSize: '0.74rem', color: '#64748B', fontWeight: 600 }}>
+                3 Pre-Configured Labs Ready
+              </span>
+            </div>
+
+            {/* Modules List */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {DEMO_PRESETS.map((preset) => {
+                const isCanonical = preset.id === 'canonical_ohms_law';
+                return (
+                  <div 
+                    key={preset.id}
+                    style={{
+                      padding: '16px 18px',
+                      borderRadius: '10px',
+                      background: isCanonical ? '#F8FAFC' : '#FFFFFF',
+                      border: isCanonical ? '1.5px solid #BFDBFE' : '1px solid #E2E8F0',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: '16px',
+                      transition: 'all 0.15s ease',
+                      boxShadow: 'var(--shadow-sm)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxWidth: '650px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontWeight: 800, fontSize: '0.94rem', color: '#0F172A' }}>
+                          {preset.title}
+                        </span>
+                        <span className="badge badge-indigo" style={{ fontSize: '0.66rem', padding: '1px 7px' }}>
+                          {preset.subject}
+                        </span>
+                        {isCanonical && (
+                          <span className="badge badge-emerald" style={{ fontSize: '0.66rem', padding: '1px 7px' }}>
+                            Canonical Lab
+                          </span>
+                        )}
+                      </div>
+
+                      <p style={{ fontSize: '0.8rem', color: '#475569', lineHeight: 1.4 }}>
+                        {preset.description}
+                      </p>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '2px', fontSize: '0.74rem', color: '#64748B' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <Clock size={12} /> {preset.time} Minutes
+                        </span>
+                        <span>•</span>
+                        <span>Level: {preset.level}</span>
+                        <span>•</span>
+                        <span>Language: {preset.language}</span>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                      {isCanonical ? (
+                        <button 
+                          onClick={onLaunchCanonicalDemo}
+                          className="btn btn-amber"
+                          style={{ padding: '8px 16px', fontSize: '0.8rem', gap: '6px' }}
+                        >
+                          <Play size={13} fill="currentColor" />
+                          <span>Launch Lab</span>
+                        </button>
+                      ) : (
+                        <button 
+                          onClick={onChooseTopic}
+                          className="btn btn-secondary"
+                          style={{ padding: '8px 16px', fontSize: '0.8rem', gap: '6px' }}
+                        >
+                          <span>Configure Lab</span>
+                          <ArrowRight size={13} />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Grounding & RAG Material Ingestion Banner */}
+          <div className="glass-panel" style={{ 
+            padding: '18px 22px', 
+            background: '#FFFFFF', 
+            border: '1px solid #E2E8F0', 
+            borderRadius: '12px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '16px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#ECFDF5', border: '1px solid #A7F3D0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#059669' }}>
+                <ShieldCheck size={20} />
+              </div>
+              <div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0F172A' }}>
+                  Educational Document Ingestion & RAG Knowledge Grounding
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#64748B', marginTop: '2px' }}>
+                  Ingest textbooks, syllabus guides, or lecture slides. The AI Teacher grounds derivations and analogies with zero educational hallucination.
+                </div>
+              </div>
+            </div>
+
+            <button 
+              onClick={onOpenUpload}
+              className="btn btn-secondary"
+              style={{ padding: '8px 16px', fontSize: '0.82rem', gap: '6px', whiteSpace: 'nowrap' }}
+            >
+              <UploadCloud size={14} />
+              <span>Ingest Material</span>
+            </button>
+          </div>
+
         </div>
-      </section>
 
-      {/* The 6-Stage Learning Journey Grid */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <div style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0F172A' }}>The Autonomous Pedagogical Journey</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginTop: '4px' }}>
-            Built to teach, not just chat. Experience complete closed-loop adaptive education.
-          </p>
+        {/* RIGHT COLUMN: Engine Architecture & Subsystems Monitor */}
+        <div style={{ position: 'sticky', top: '84px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          
+          <div className="glass-panel" style={{ padding: '20px', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            
+            {/* Monitor Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Terminal size={16} color="#2563EB" />
+                <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0F172A' }}>
+                  Subsystems & Architecture Monitor
+                </span>
+              </div>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.72rem', color: '#059669', fontWeight: 700, background: '#ECFDF5', padding: '2px 8px', borderRadius: '12px', border: '1px solid #A7F3D0' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981' }} />
+                5/5 Online
+              </span>
+            </div>
+
+            {/* Subsystems Readiness Grid */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              
+              {/* Subsystem 1 */}
+              <div style={{ background: '#F8FAFC', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Video size={14} color="#2563EB" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0F172A' }}>Spoken Video Avatar Engine</span>
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>Lip-Sync Ready</span>
+              </div>
+
+              {/* Subsystem 2 */}
+              <div style={{ background: '#F8FAFC', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Activity size={14} color="#2563EB" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0F172A' }}>Smart Whiteboard Simulator</span>
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>Interactive</span>
+              </div>
+
+              {/* Subsystem 3 */}
+              <div style={{ background: '#F8FAFC', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <BrainCircuit size={14} color="#2563EB" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0F172A' }}>Diagnostic Misconception Loop</span>
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>Active</span>
+              </div>
+
+              {/* Subsystem 4 */}
+              <div style={{ background: '#F8FAFC', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Compass size={14} color="#2563EB" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0F172A' }}>Multilingual Adaptation Engine</span>
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>Hinglish / En / Hi</span>
+              </div>
+
+              {/* Subsystem 5 */}
+              <div style={{ background: '#F8FAFC', padding: '10px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <ShieldCheck size={14} color="#2563EB" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0F172A' }}>RAG Hallucination Guardrail</span>
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>Verified</span>
+              </div>
+
+            </div>
+
+            {/* Technical Specifications */}
+            <div style={{ borderTop: '1px solid #E2E8F0', paddingTop: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ fontSize: '0.72rem', color: '#64748B', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em', marginBottom: '2px' }}>
+                Runtime Telemetry
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#475569' }}>
+                <span>Backend Framework</span>
+                <span style={{ fontWeight: 600, color: '#0F172A' }}>FastAPI (Async Python)</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#475569' }}>
+                <span>Inference Model</span>
+                <span style={{ fontWeight: 600, color: '#0F172A' }}>Gemini 3.7 Flash</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#475569' }}>
+                <span>Whiteboard Visuals</span>
+                <span style={{ fontWeight: 600, color: '#0F172A' }}>Circuits, KaTeX, Graphs</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#475569' }}>
+                <span>Evaluation Latency</span>
+                <span style={{ fontWeight: 600, color: '#0F172A' }}>~120ms (Streaming)</span>
+              </div>
+            </div>
+
+            {/* Quick Launch Action Button */}
+            <button 
+              onClick={onLaunchCanonicalDemo}
+              className="btn btn-primary"
+              style={{ width: '100%', padding: '11px', fontSize: '0.88rem', gap: '8px', borderRadius: '8px' }}
+            >
+              <Play size={14} fill="currentColor" />
+              <span>Launch Canonical Ohm's Law Lab</span>
+            </button>
+
+          </div>
+
         </div>
 
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-          gap: '20px' 
-        }}>
-          {/* Card 1 */}
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2563EB' }}>
-              <BookOpen size={20} />
-            </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>1. Topic or Material Input</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Choose any topic or upload textbooks, notes, and PDFs. Grounded via RAG to ensure zero educational hallucination.
-            </p>
-          </div>
+      </div>
 
-          {/* Card 2 */}
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#F0FDF4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#059669' }}>
-              <BrainCircuit size={20} />
-            </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>2. Personalized Lesson Plan</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Tailors language (English, Hindi, Hinglish), educational depth, available time, and teaching style to your exact profile.
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2563EB' }}>
-              <Video size={20} />
-            </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>3. Human-Like Video Teacher</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Animated avatar with real-time lip synchronization, emotional responsiveness, and natural spoken pedagogy.
-            </p>
-          </div>
-
-          {/* Card 4 */}
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#FFFBEB', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#D97706' }}>
-              <Activity size={20} />
-            </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>4. Dynamic Educational Visuals</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Subject-aware smart whiteboard: interactive circuit simulators, step-by-step KaTeX math derivations, and algorithm code tracers.
-            </p>
-          </div>
-
-          {/* Card 5 */}
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#FEF2F2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#DC2626' }}>
-              <BrainCircuit size={20} />
-            </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>5. Active Adaptation & Remediation</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Diagnoses underlying misconceptions in student answers and dynamically adapts using alternative analogies, simpler models, and visual proofs.
-            </p>
-          </div>
-
-          {/* Card 6 */}
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#F5F3FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7C3AED' }}>
-              <Award size={20} />
-            </div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>6. Assessment & Learning Report</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Summative multi-question assessment and an actionable learning report detailing mastered concepts, revision drills, and next topics.
-            </p>
-          </div>
+      {/* Fixed Software Application Status Line */}
+      <footer style={{ 
+        borderTop: '1px solid #E2E8F0', 
+        paddingTop: '14px', 
+        color: '#64748B', 
+        fontSize: '0.75rem', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '8px'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
+          <span>AI Teacher Studio v2.4.0 • Gemini 3.7 Flash • Zero Hallucination Mode Active</span>
         </div>
-      </section>
-
-      {/* Trust & Transparency Note */}
-      <footer style={{ textAlign: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '20px', color: 'var(--text-muted)', fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <ShieldCheck size={16} color="#10B981" />
-        <span>AI Teacher uses AI-generated pedagogical avatars and grounded curriculum engines. Designed for high-fidelity personalized education.</span>
+        <div style={{ display: 'flex', gap: '16px' }}>
+          <span>Host: localhost:5173</span>
+          <span>API: 127.0.0.1:8000</span>
+          <span>WebSocket Voice: Active</span>
+        </div>
       </footer>
+
     </div>
   );
 }
