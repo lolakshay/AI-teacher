@@ -318,6 +318,12 @@ textarea::placeholder {
 }
 
 /* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .setup-studio-workbench {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 960px) {
   main {
     grid-template-columns: 1fr !important;
@@ -328,3 +334,4 @@ textarea::placeholder {
     overflow-y: visible !important;
   }
 }
+
